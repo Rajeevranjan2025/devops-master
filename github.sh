@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd /home/rajeev/devops-master || exit
 echo "=============================="
 echo "      GitHub Push Script"
 echo "=============================="
