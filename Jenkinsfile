@@ -3,18 +3,9 @@ pipeline {
 
     stages {
 
-        stage('Git Info') {
+        stage('Checkout') {
             steps {
-                sh 'git --version'
-                sh 'pwd'
-            }
-        }
-
-        stage('System Info') {
-            steps {
-                sh 'whoami'
-                sh 'hostname'
-                sh 'date'
+                echo 'Checking out source code'
             }
         }
 
@@ -26,7 +17,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running Tests'
+                echo 'Running Unit Tests'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging Application'
             }
         }
 
