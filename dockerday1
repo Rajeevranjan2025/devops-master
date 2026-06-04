@@ -1,0 +1,454 @@
+========================================================
+DOCKER INTERVIEW REVISION NOTES
+BEGINNER TO DEVOPS LEVEL
+========================================================
+
+1. WHAT IS DOCKER?
+------------------
+Docker is a containerization platform used to package
+applications and their dependencies together.
+
+Benefits:
+- Consistent environments
+- Faster deployments
+- Lightweight
+- Portable
+
+========================================================
+
+2. IMAGE VS CONTAINER
+---------------------
+
+IMAGE
+-----
+- Blueprint/Template
+- Read-only
+- Used to create containers
+
+Examples:
+nginx
+ubuntu
+jenkins
+
+CONTAINER
+---------
+- Running instance of image
+- Executable environment
+
+Example:
+
+ubuntu image
+      ↓
+docker run
+      ↓
+ubuntu container
+
+Interview Answer:
+Image = Blueprint
+Container = Running Instance
+
+========================================================
+
+3. CHECK DOCKER VERSION
+-----------------------
+
+docker --version
+
+Purpose:
+Verify Docker installation.
+
+========================================================
+
+4. LIST IMAGES
+--------------
+
+docker images
+
+Purpose:
+Show all downloaded images.
+
+Output:
+Repository
+Tag
+Image ID
+Size
+
+========================================================
+
+5. DOWNLOAD IMAGE
+-----------------
+
+docker pull nginx
+
+Purpose:
+Download image from Docker Hub.
+
+========================================================
+
+6. RUN CONTAINER
+----------------
+
+docker run ubuntu
+
+Purpose:
+Create and start container.
+
+Why container exits?
+No foreground process running.
+
+========================================================
+
+7. INTERACTIVE CONTAINER
+------------------------
+
+docker run -it ubuntu bash
+
+-i = Interactive
+-t = Terminal
+
+Purpose:
+Enter container shell.
+
+Output:
+
+root@containerid:/#
+
+========================================================
+
+8. DETACHED MODE
+----------------
+
+docker run -d nginx
+
+-d = Detached Mode
+
+Purpose:
+Run container in background.
+
+========================================================
+
+9. NAMED CONTAINER
+------------------
+
+docker run -d --name mynginx nginx
+
+Purpose:
+Give custom name to container.
+
+========================================================
+
+10. PORT MAPPING
+----------------
+
+docker run -d --name mynginx -p 8081:80 nginx
+
+Meaning:
+
+HOST PORT      CONTAINER PORT
+
+8081     --->      80
+
+Purpose:
+Expose container application outside.
+
+Access:
+
+http://localhost:8081
+
+========================================================
+
+11. LIST RUNNING CONTAINERS
+---------------------------
+
+docker ps
+
+Purpose:
+Show running containers.
+
+========================================================
+
+12. LIST ALL CONTAINERS
+-----------------------
+
+docker ps -a
+
+Purpose:
+Show running + stopped containers.
+
+========================================================
+
+13. ENTER RUNNING CONTAINER
+---------------------------
+
+docker exec -it mynginx bash
+
+Purpose:
+Open shell inside running container.
+
+========================================================
+
+14. CONTAINER LOGS
+------------------
+
+docker logs mynginx
+
+Purpose:
+View container output/logs.
+
+========================================================
+
+15. STOP CONTAINER
+------------------
+
+docker stop mynginx
+
+Purpose:
+Gracefully stop container.
+
+========================================================
+
+16. START CONTAINER
+-------------------
+
+docker start mynginx
+
+Purpose:
+Start stopped container.
+
+========================================================
+
+17. RESTART CONTAINER
+---------------------
+
+docker restart mynginx
+
+Purpose:
+Stop and start container.
+
+========================================================
+
+18. REMOVE CONTAINER
+--------------------
+
+docker rm mynginx
+
+Purpose:
+Delete stopped container.
+
+Force delete:
+
+docker rm -f mynginx
+
+========================================================
+
+19. REMOVE IMAGE
+----------------
+
+docker rmi nginx
+
+Purpose:
+Delete image.
+
+========================================================
+
+20. INSPECT IMAGE
+-----------------
+
+docker image inspect nginx
+
+Purpose:
+Show image metadata.
+
+Important Fields:
+
+RepoTags
+ExposedPorts
+Env
+Entrypoint
+Cmd
+Architecture
+Layers
+
+========================================================
+
+21. INSPECT CONTAINER
+---------------------
+
+docker inspect mynginx
+
+Purpose:
+Show detailed container information.
+
+========================================================
+
+22. ENTRYPOINT
+--------------
+
+Example:
+
+ENTRYPOINT ["nginx"]
+
+Purpose:
+Main executable started by container.
+
+========================================================
+
+23. CMD
+--------
+
+CMD ["-g","daemon off;"]
+
+Purpose:
+Default arguments for ENTRYPOINT.
+
+Final Command:
+
+nginx -g "daemon off;"
+
+========================================================
+
+24. DOCKERFILE
+--------------
+
+Used to build custom images.
+
+Example:
+
+FROM ubuntu
+
+RUN apt update
+
+CMD ["echo","Hello Docker"]
+
+========================================================
+
+25. BUILD IMAGE
+---------------
+
+docker build -t myapp .
+
+-t = Tag
+
+Purpose:
+Create image from Dockerfile.
+
+========================================================
+
+26. RUN CUSTOM IMAGE
+--------------------
+
+docker run myapp
+
+Purpose:
+Run image created from Dockerfile.
+
+========================================================
+
+27. HOST VS CONTAINER
+---------------------
+
+HOST
+----
+Actual machine running Docker.
+
+CONTAINER
+---------
+Isolated environment running application.
+
+========================================================
+
+28. WHY "docker: command not found"
+-----------------------------------
+
+Inside Ubuntu container:
+
+docker run -it ubuntu bash
+
+docker
+
+Output:
+
+docker: command not found
+
+Reason:
+Docker installed on host,
+not inside container.
+
+========================================================
+
+29. IMPORTANT PORTS
+-------------------
+
+Nginx      80
+SSH        22
+HTTP       80
+HTTPS      443
+Jenkins    8080
+K8s API    6443
+
+========================================================
+
+30. MOST IMPORTANT INTERVIEW QUESTIONS
+--------------------------------------
+
+Q. What is Docker?
+A. Containerization platform.
+
+Q. Difference between Image and Container?
+A.
+Image = Blueprint
+Container = Running instance
+
+Q. What does docker ps do?
+A. Show running containers.
+
+Q. What does docker ps -a do?
+A. Show all containers.
+
+Q. What does -it mean?
+A.
+-i = Interactive
+-t = Terminal
+
+Q. What does -d mean?
+A. Detached/background mode.
+
+Q. What does -p 8081:80 mean?
+A.
+Host port 8081 mapped to
+container port 80.
+
+Q. What is ENTRYPOINT?
+A. Main executable of container.
+
+Q. What is CMD?
+A. Default arguments passed to ENTRYPOINT.
+
+Q. What is Dockerfile?
+A. File used to build Docker images.
+
+Q. What does docker exec -it do?
+A. Enter running container.
+
+Q. What does docker logs do?
+A. Show container logs.
+
+Q. What does docker image inspect do?
+A. Show image metadata.
+
+========================================================
+
+MEMORY TRICK
+------------
+
+Docker Image
+      ↓
+docker run
+      ↓
+Container
+      ↓
+docker exec
+      ↓
+Inside Container
+
+========================================================
