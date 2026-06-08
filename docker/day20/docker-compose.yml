@@ -1,0 +1,9 @@
+services:
+  web:
+    image: nginx
+    ports:
+      - "8084:80"
+
+  ubuntu:
+    image: ubuntu
+    command: sleep infinity
